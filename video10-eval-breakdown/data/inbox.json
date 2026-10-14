@@ -1,0 +1,562 @@
+[
+ {
+  "id": "M-01",
+  "from": "disputes@stripe.com",
+  "subject": "Chargeback notice: case 956733",
+  "body": "A cardholder at Brightline Logistics has disputed a charge of $1,925.00, reason code 10.4 (fraud, card not present). The funds have been withdrawn from your balance. Submit evidence within 7 days or the dispute is closed in the cardholder's favour.",
+  "label": "payment_dispute"
+ },
+ {
+  "id": "M-02",
+  "from": "disputes@stripe.com",
+  "subject": "Chargeback notice: case 760256",
+  "body": "Notice of chargeback for $8,500.00 from Summit Legal. Reason: product not received. You have 10 days to accept or challenge this dispute.",
+  "label": "payment_dispute"
+ },
+ {
+  "id": "M-03",
+  "from": "aisha@brightline.com",
+  "subject": "Question about billing",
+  "body": "Hi, how do I change the card we pay with? Our old one expires next month. Aisha",
+  "label": "support_question"
+ },
+ {
+  "id": "M-04",
+  "from": "tom@quarry.com",
+  "subject": "Refund request",
+  "body": "We cancelled within the first week but were still billed $2,800.00. Please refund it. Tom",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-05",
+  "from": "raj@atlas.com",
+  "subject": "Refund for unused seats",
+  "body": "Hi, we were charged $5,875.00 twice this month. Could you refund the duplicate charge? Thanks, Raj, Atlas Hotels",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-06",
+  "from": "priya@bluefin.com",
+  "subject": "Where can I download invoices?",
+  "body": "Can you add our VAT number to future invoices? It's GB387612212. Thanks, Priya, Bluefin Media",
+  "label": "support_question"
+ },
+ {
+  "id": "M-07",
+  "from": "daniel@orchid.com",
+  "subject": "Charged twice",
+  "body": "Hi, we were charged $1,275.00 twice this month. Could you refund the duplicate charge? Thanks, Daniel, Orchid Retail",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-08",
+  "from": "aisha@atlas.com",
+  "subject": "Question about billing",
+  "body": "Can you add our VAT number to future invoices? It's GB753025528. Thanks, Aisha, Atlas Hotels",
+  "label": "support_question"
+ },
+ {
+  "id": "M-09",
+  "from": "owen@fairway.com",
+  "subject": "Refund request",
+  "body": "We cancelled within the first week but were still billed $1,875.00. Please refund it. Owen",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-10",
+  "from": "disputes@visa.com",
+  "subject": "Action required: cardholder dispute",
+  "body": "A cardholder at Kestrel Health has disputed a charge of $7,575.00, reason code 10.4 (fraud, card not present). The funds have been withdrawn from your balance. Submit evidence within 7 days or the dispute is closed in the cardholder's favour.",
+  "label": "payment_dispute"
+ },
+ {
+  "id": "M-11",
+  "from": "billing@metric.com",
+  "subject": "Metric Ads: your June invoice",
+  "body": "Reminder: invoice INV-2533 for $3,550.00 is due on 16 June. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-12",
+  "from": "owen@kestrel.com",
+  "subject": "Cancel and refund annual plan",
+  "body": "We removed 10 seats last month. Can we get a refund for them? Owen, Kestrel Health",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-13",
+  "from": "raj@harbor.com",
+  "subject": "Cancel and refund annual plan",
+  "body": "We cancelled within the first week but were still billed $4,125.00. Please refund it. Raj",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-14",
+  "from": "billing@securemail.com",
+  "subject": "Payment due: SecureMail",
+  "body": "Please find attached invoice INV-7233 for $3,050.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-15",
+  "from": "jonas@atlas.com",
+  "subject": "Charged twice",
+  "body": "We cancelled within the first week but were still billed $7,050.00. Please refund it. Jonas",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-16",
+  "from": "daniel@lumen.com",
+  "subject": "Can we get our money back?",
+  "body": "Hi, we were charged $7,100.00 twice this month. Could you refund the duplicate charge? Thanks, Daniel, Lumen Dental",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-17",
+  "from": "linda@summit.com",
+  "subject": "Multi-year contract quote",
+  "body": "We're happy to renew for another year. Could you send the renewal order form? Linda",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-18",
+  "from": "disputes@mastercard.com",
+  "subject": "Action required: cardholder dispute",
+  "body": "Notice of chargeback for $9,050.00 from Lumen Dental. Reason: product not received. You have 10 days to accept or challenge this dispute.",
+  "label": "payment_dispute"
+ },
+ {
+  "id": "M-19",
+  "from": "aisha@redwood.com",
+  "subject": "Cancel and refund annual plan",
+  "body": "We cancelled within the first week but were still billed $6,925.00. Please refund it. Aisha",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-20",
+  "from": "raj@harbor.com",
+  "subject": "Can we get our money back?",
+  "body": "We cancelled within the first week but were still billed $3,975.00. Please refund it. Raj",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-21",
+  "from": "billing@cloudcore.com",
+  "subject": "CloudCore Hosting: your April invoice",
+  "body": "Please find attached invoice INV-2144 for $3,175.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-22",
+  "from": "priya@bluefin.com",
+  "subject": "Where can I download invoices?",
+  "body": "Hi, how do I change the card we pay with? Our old one expires next month. Priya",
+  "label": "support_question"
+ },
+ {
+  "id": "M-23",
+  "from": "fatima@lumen.com",
+  "subject": "Where can I download invoices?",
+  "body": "Our finance contact has changed. Please send billing emails to accounts@lumen.com from now on. Fatima",
+  "label": "support_question"
+ },
+ {
+  "id": "M-24",
+  "from": "raj@harbor.com",
+  "subject": "VAT number on invoices",
+  "body": "Hi, how do I change the card we pay with? Our old one expires next month. Raj",
+  "label": "support_question"
+ },
+ {
+  "id": "M-25",
+  "from": "daniel@copperleaf.com",
+  "subject": "Refund for unused seats",
+  "body": "We cancelled within the first week but were still billed $7,850.00. Please refund it. Daniel",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-26",
+  "from": "billing@officehub.com",
+  "subject": "Payment due: OfficeHub",
+  "body": "Reminder: invoice INV-4197 for $3,150.00 is due on 27 April. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-27",
+  "from": "carlos@northgate.com",
+  "subject": "How do I update our card?",
+  "body": "Hi, how do I change the card we pay with? Our old one expires next month. Carlos",
+  "label": "support_question"
+ },
+ {
+  "id": "M-28",
+  "from": "billing@fibernet.com",
+  "subject": "Payment due: FiberNet Telecom",
+  "body": "Please find attached invoice INV-6636 for $8,325.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-29",
+  "from": "billing@fibernet.com",
+  "subject": "Payment due: FiberNet Telecom",
+  "body": "Reminder: invoice INV-8588 for $5,225.00 is due on 24 January. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-30",
+  "from": "billing@officehub.com",
+  "subject": "OfficeHub: your May invoice",
+  "body": "Reminder: invoice INV-5577 for $6,125.00 is due on 9 February. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-31",
+  "from": "billing@printpoint.com",
+  "subject": "Payment due: PrintPoint",
+  "body": "Reminder: invoice INV-8301 for $3,725.00 is due on 23 April. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-32",
+  "from": "billing@metric.com",
+  "subject": "Metric Ads: your June invoice",
+  "body": "Please find attached invoice INV-6974 for $1,125.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-33",
+  "from": "billing@metric.com",
+  "subject": "Metric Ads: your April invoice",
+  "body": "Please find attached invoice INV-3753 for $7,900.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-34",
+  "from": "priya@redwood.com",
+  "subject": "Charged twice",
+  "body": "We cancelled within the first week but were still billed $2,675.00. Please refund it. Priya",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-35",
+  "from": "billing@cloudcore.com",
+  "subject": "Invoice INV-8945 from CloudCore Hosting",
+  "body": "Reminder: invoice INV-7864 for $6,925.00 is due on 12 May. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-36",
+  "from": "mei@lumen.com",
+  "subject": "Renewing for another year",
+  "body": "Can you quote us a three-year contract for 174 seats? Mei at Lumen Dental",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-37",
+  "from": "billing@datastream.com",
+  "subject": "Payment due: Datastream Ltd",
+  "body": "Your January statement from Datastream Ltd is ready. Amount due: $9,000.00. Payment terms are net 30.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-38",
+  "from": "sofia@fairway.com",
+  "subject": "VAT number on invoices",
+  "body": "Can you add our VAT number to future invoices? It's GB911508888. Thanks, Sofia, Fairway Foods",
+  "label": "support_question"
+ },
+ {
+  "id": "M-39",
+  "from": "mei@quarry.com",
+  "subject": "VAT number on invoices",
+  "body": "Can you add our VAT number to future invoices? It's GB535883162. Thanks, Mei, Quarry Labs",
+  "label": "support_question"
+ },
+ {
+  "id": "M-40",
+  "from": "billing@datastream.com",
+  "subject": "Invoice INV-3785 from Datastream Ltd",
+  "body": "Your April statement from Datastream Ltd is ready. Amount due: $8,475.00. Payment terms are net 30.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-41",
+  "from": "sofia@quarry.com",
+  "subject": "Renewal coming up",
+  "body": "Can you quote us a three-year contract for 370 seats? Sofia at Quarry Labs",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-42",
+  "from": "owen@fairway.com",
+  "subject": "Charged twice",
+  "body": "We removed 10 seats last month. Can we get a refund for them? Owen, Fairway Foods",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-43",
+  "from": "fatima@redwood.com",
+  "subject": "Charged twice",
+  "body": "We removed 10 seats last month. Can we get a refund for them? Fatima, Redwood Insurance",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-44",
+  "from": "billing@fibernet.com",
+  "subject": "Invoice INV-7560 from FiberNet Telecom",
+  "body": "Please find attached invoice INV-2103 for $2,750.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-45",
+  "from": "priya@summit.com",
+  "subject": "Upgrade to Enterprise",
+  "body": "Our contract renews in February. We'd like to add 20 seats and move to Enterprise. Can you send a quote? Priya, Summit Legal",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-46",
+  "from": "billing@cloudcore.com",
+  "subject": "Invoice INV-3478 from CloudCore Hosting",
+  "body": "Reminder: invoice INV-4407 for $7,950.00 is due on 13 February. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-47",
+  "from": "linda@kestrel.com",
+  "subject": "Renewing for another year",
+  "body": "We're happy to renew for another year. Could you send the renewal order form? Linda",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-48",
+  "from": "aisha@brightline.com",
+  "subject": "Question about billing",
+  "body": "Can you add our VAT number to future invoices? It's GB958550599. Thanks, Aisha, Brightline Logistics",
+  "label": "support_question"
+ },
+ {
+  "id": "M-49",
+  "from": "billing@securemail.com",
+  "subject": "SecureMail: your May invoice",
+  "body": "Please find attached invoice INV-8768 for $1,650.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-50",
+  "from": "priya@quarry.com",
+  "subject": "Can we get our money back?",
+  "body": "Hi, we were charged $6,900.00 twice this month. Could you refund the duplicate charge? Thanks, Priya, Quarry Labs",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-51",
+  "from": "tom@bluefin.com",
+  "subject": "Upgrade to Enterprise",
+  "body": "Our contract renews in April. We'd like to add 20 seats and move to Enterprise. Can you send a quote? Tom, Bluefin Media",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-52",
+  "from": "carlos@summit.com",
+  "subject": "Change billing contact",
+  "body": "Can you add our VAT number to future invoices? It's GB821723300. Thanks, Carlos, Summit Legal",
+  "label": "support_question"
+ },
+ {
+  "id": "M-53",
+  "from": "daniel@summit.com",
+  "subject": "Question about billing",
+  "body": "Hi, how do I change the card we pay with? Our old one expires next month. Daniel",
+  "label": "support_question"
+ },
+ {
+  "id": "M-54",
+  "from": "mei@northgate.com",
+  "subject": "Renewing for another year",
+  "body": "Our contract renews in June. We'd like to add 20 seats and move to Enterprise. Can you send a quote? Mei, Northgate Schools",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-55",
+  "from": "owen@orchid.com",
+  "subject": "Refund request",
+  "body": "We cancelled within the first week but were still billed $6,325.00. Please refund it. Owen",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-56",
+  "from": "disputes@amex.com",
+  "subject": "Dispute opened on a card payment",
+  "body": "Notice of chargeback for $9,350.00 from Atlas Hotels. Reason: product not received. You have 10 days to accept or challenge this dispute.",
+  "label": "payment_dispute"
+ },
+ {
+  "id": "M-57",
+  "from": "priya@willow.com",
+  "subject": "Refund request",
+  "body": "Hi, we were charged $3,275.00 twice this month. Could you refund the duplicate charge? Thanks, Priya, Willow Pharma",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-58",
+  "from": "tom@bluefin.com",
+  "subject": "Renewal coming up",
+  "body": "We're happy to renew for another year. Could you send the renewal order form? Tom",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-59",
+  "from": "carlos@kestrel.com",
+  "subject": "Refund for unused seats",
+  "body": "Hi, we were charged $9,375.00 twice this month. Could you refund the duplicate charge? Thanks, Carlos, Kestrel Health",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-60",
+  "from": "aisha@lumen.com",
+  "subject": "Change billing contact",
+  "body": "Can you add our VAT number to future invoices? It's GB915505040. Thanks, Aisha, Lumen Dental",
+  "label": "support_question"
+ },
+ {
+  "id": "M-61",
+  "from": "raj@northgate.com",
+  "subject": "Question about billing",
+  "body": "Can you add our VAT number to future invoices? It's GB946498388. Thanks, Raj, Northgate Schools",
+  "label": "support_question"
+ },
+ {
+  "id": "M-62",
+  "from": "billing@printpoint.com",
+  "subject": "Invoice INV-1976 from PrintPoint",
+  "body": "Your May statement from PrintPoint is ready. Amount due: $5,550.00. Payment terms are net 30.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-63",
+  "from": "priya@northgate.com",
+  "subject": "Change billing contact",
+  "body": "Where in the app can I download past invoices for our accountant? Priya",
+  "label": "support_question"
+ },
+ {
+  "id": "M-64",
+  "from": "linda@summit.com",
+  "subject": "How do I update our card?",
+  "body": "Where in the app can I download past invoices for our accountant? Linda",
+  "label": "support_question"
+ },
+ {
+  "id": "M-65",
+  "from": "billing@metric.com",
+  "subject": "Payment due: Metric Ads",
+  "body": "Please find attached invoice INV-1791 for $1,025.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-66",
+  "from": "fatima@bluefin.com",
+  "subject": "Refund for unused seats",
+  "body": "Hi, we were charged $6,875.00 twice this month. Could you refund the duplicate charge? Thanks, Fatima, Bluefin Media",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-67",
+  "from": "linda@fairway.com",
+  "subject": "Change billing contact",
+  "body": "Can you add our VAT number to future invoices? It's GB691684493. Thanks, Linda, Fairway Foods",
+  "label": "support_question"
+ },
+ {
+  "id": "M-68",
+  "from": "carlos@quarry.com",
+  "subject": "Can we get our money back?",
+  "body": "We cancelled within the first week but were still billed $150.00. Please refund it. Carlos",
+  "label": "refund_request"
+ },
+ {
+  "id": "M-69",
+  "from": "aisha@willow.com",
+  "subject": "Multi-year contract quote",
+  "body": "Our contract renews in February. We'd like to add 20 seats and move to Enterprise. Can you send a quote? Aisha, Willow Pharma",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-70",
+  "from": "billing@officehub.com",
+  "subject": "Payment due: OfficeHub",
+  "body": "Reminder: invoice INV-3181 for $3,800.00 is due on 14 February. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-71",
+  "from": "billing@securemail.com",
+  "subject": "Payment due: SecureMail",
+  "body": "Please find attached invoice INV-7850 for $2,200.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-72",
+  "from": "linda@copperleaf.com",
+  "subject": "Renewing for another year",
+  "body": "Can you quote us a three-year contract for 218 seats? Linda at Copperleaf Energy",
+  "label": "contract_renewal"
+ },
+ {
+  "id": "M-73",
+  "from": "priya@fairway.com",
+  "subject": "How do I update our card?",
+  "body": "Can you add our VAT number to future invoices? It's GB217522609. Thanks, Priya, Fairway Foods",
+  "label": "support_question"
+ },
+ {
+  "id": "M-74",
+  "from": "raj@willow.com",
+  "subject": "Question about billing",
+  "body": "Where in the app can I download past invoices for our accountant? Raj",
+  "label": "support_question"
+ },
+ {
+  "id": "M-75",
+  "from": "billing@metric.com",
+  "subject": "Payment due: Metric Ads",
+  "body": "Please find attached invoice INV-1884 for $5,925.00, due within 30 days. Bank details are on the invoice.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-76",
+  "from": "daniel@harbor.com",
+  "subject": "Change billing contact",
+  "body": "Where in the app can I download past invoices for our accountant? Daniel",
+  "label": "support_question"
+ },
+ {
+  "id": "M-77",
+  "from": "billing@datastream.com",
+  "subject": "Datastream Ltd: your June invoice",
+  "body": "Your June statement from Datastream Ltd is ready. Amount due: $2,150.00. Payment terms are net 30.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-78",
+  "from": "billing@securemail.com",
+  "subject": "Payment due: SecureMail",
+  "body": "Your May statement from SecureMail is ready. Amount due: $3,925.00. Payment terms are net 30.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-79",
+  "from": "billing@printpoint.com",
+  "subject": "Payment due: PrintPoint",
+  "body": "Reminder: invoice INV-4078 for $4,850.00 is due on 4 May. Thank you for your business.",
+  "label": "invoice"
+ },
+ {
+  "id": "M-80",
+  "from": "billing@officehub.com",
+  "subject": "OfficeHub: your April invoice",
+  "body": "Reminder: invoice INV-5552 for $1,850.00 is due on 27 April. Thank you for your business.",
+  "label": "invoice"
+ }
+]

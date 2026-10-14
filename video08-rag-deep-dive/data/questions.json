@@ -1,0 +1,16 @@
+[
+  {"id": "Q01", "question": "How long does a customer on an annual plan have to request a refund?", "answer": "30 days", "must_include": ["30 days"], "gold": "full refund within 30 days of purchase"},
+  {"id": "Q02", "question": "How long after a charge can a monthly plan be refunded?", "answer": "7 days", "must_include": ["7 days"], "gold": "within 7 days of a charge"},
+  {"id": "Q03", "question": "What uptime does the Enterprise plan guarantee?", "answer": "99.95%", "must_include": ["99.95"], "gold": "99.95% monthly availability"},
+  {"id": "Q04", "question": "What uptime target does the Team plan have?", "answer": "99.5% per month", "must_include": ["99.5"], "gold": "uptime target of 99.5%"},
+  {"id": "Q05", "question": "What service credit does an Enterprise customer get if availability drops below the SLA?", "answer": "10% of the monthly fee, 25% below 99.0%", "must_include": ["10%"], "gold": "service credit of 10%"},
+  {"id": "Q06", "question": "How long is data kept after a workspace is cancelled?", "answer": "90 days", "must_include": ["90 days"], "gold": "kept for 90 days"},
+  {"id": "Q07", "question": "Which plan includes single sign-on?", "answer": "Enterprise", "must_include": ["Enterprise"], "gold": "available on the Enterprise plan only"},
+  {"id": "Q08", "question": "In what format is a data export delivered?", "answer": "A ZIP file of JSON documents", "must_include": ["JSON"], "gold": "ZIP file of JSON documents"},
+  {"id": "Q09", "question": "How fast is the first response for an Enterprise priority 1 incident?", "answer": "Within 1 hour", "must_include": ["1 hour"], "gold": "first response within 1 hour"},
+  {"id": "Q10", "question": "How long is an account locked after too many failed sign-ins?", "answer": "15 minutes, after 5 failed attempts", "must_include": ["15 minutes"], "gold": "locked for 15 minutes"},
+  {"id": "Q11", "question": "Who handles refunds for a plan bought through a reseller?", "answer": "The reseller", "must_include": ["reseller"], "gold": "must go to the reseller"},
+  {"id": "Q12", "question": "How are seats added mid-cycle billed?", "answer": "Pro-rated for the days left in the cycle", "must_include": ["pro-rated"], "gold": "are pro-rated"},
+  {"id": "Q13", "question": "Do you offer an on-premise version of Northwind Cloud?", "answer": null, "must_include": [], "gold": null},
+  {"id": "Q14", "question": "Is Northwind Cloud HIPAA certified?", "answer": null, "must_include": [], "gold": null}
+]

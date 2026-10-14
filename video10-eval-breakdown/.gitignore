@@ -1,0 +1,8 @@
+# Never commit secrets or local state.
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.cache/
+outbox/
+.DS_Store

@@ -1,0 +1,4 @@
+groq==1.7.0
+python-dotenv==1.2.4
+# tests
+pytest==9.1.1
