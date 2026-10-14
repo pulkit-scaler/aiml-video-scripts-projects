@@ -104,7 +104,7 @@ SAY: "So what does that mean for you?"
 
 ## 13:45 Close (1 min)
 
-SAY: "And here's the thing. This is one project. In the program you build several. An AI study companion for Scaler learners. And a video classifier that spots adult content, the kind of check every video platform needs, taken all the way to a live system."
+SAY: "And here's the thing. This is one project. In the program you build several. Amazon-style product suggestions. A system that blurs faces and number plates in street photos. And a generative AI chatbot."
 
 SAY: "You don't watch them. You build them, you test them, you deploy them. Just like you saw today."
 
