@@ -1,7 +1,8 @@
 """Step 5: wrap the agent in a web service so anything can call it.
 
-Run:  uvicorn steps.step5_service:app --reload
-Then: curl localhost:8000/health
+Run:  uvicorn steps.step5_service:app --reload --port 8010
+Then: curl localhost:8010/health
+(Port 8010, not uvicorn's default 8000, which other local apps often hold.)
 """
 
 import sys

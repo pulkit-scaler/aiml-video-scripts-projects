@@ -22,7 +22,8 @@ LABELS_V1 = {
 }
 
 # The fix: the label set was built from five easy examples, so it had no place for a
-# chargeback. The model filed them as refunds, and nobody answered the bank in time.
+# chargeback. The model filed them under other labels (mostly support_question), so nobody
+# answered the bank in time.
 LABELS_V2 = {
     "invoice": "a vendor is billing Northwind Cloud",
     "refund_request": "a customer asks US directly for money back",

@@ -96,7 +96,8 @@ def tidy(text: str) -> str:
     for odd, plain in {"\u202f": " ", "\u00a0": " ", "\u2011": "-", "\u2010": "-", "\u2013": "-",
                        "\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"', "**": ""}.items():
         text = text.replace(odd, plain)
-    return text
+    # "10 %" became "10 %" above. Join it back, so "10%" scores as correct and reads cleanly.
+    return re.sub(r"(\d) %", r"\1%", text)
 
 
 def generate_text(prompt: str, system: str = "", *, temperature: float = 0.0, fresh: bool = False) -> str:

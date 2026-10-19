@@ -6,7 +6,7 @@
 
 **The build:** a support-ticket agent for a fictional company, Northwind Cloud. It reads each ticket, summarises it, sets urgency to high, medium or low, checks the company policy, alerts Slack when it's urgent, and drafts a reply. The full project is in `video01-support-agent/`, and every command below comes from its README.
 
-**Prep:** project open in the editor, `.env` filled in, Slack test channel visible, and the finished `agent.py` running in a second terminal as a safety net. Do a full dry run the day before.
+**Prep:** project open in the editor, `.env` filled in, the #northwind-oncall-alerts Slack channel visible (setup steps are in the project README), and the finished `agent.py` running in a second terminal as a safety net. Do a full dry run the day before.
 
 ## 0:00 Hook (30 sec)
 

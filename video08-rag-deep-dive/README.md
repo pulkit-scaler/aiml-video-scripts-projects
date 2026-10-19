@@ -40,7 +40,7 @@ SCRIPT.md           the shooting script
 | 2. Fix one: chunking | `python demo.py beat2` | Same question, now **30 days**. | One chunk per section, labelled `[Billing and refunds > Annual plans]`. The answer was in the document all along. |
 | 3. Fix two: search | `python demo.py beat3` | "What uptime does the Enterprise plan guarantee?" Keyword search returns the **Team plan** paragraph (99.5%). Hybrid search returns the **Enterprise SLA** (99.95%). | The Team paragraph shares the question's words ("uptime", "plan", "guarantee"). The SLA says "availability" and "contractual commitment". Embeddings match meaning, BM25 matches rare words, rank fusion merges both. |
 | 4. Measure it | `python demo.py beat4` | A table: each version's *found* (right passage retrieved), *correct* and *made up* scores. | Same 14 questions every time. "Looks better" becomes a number. |
-| 5. "I don't know" | `python demo.py beat5` | "Do you offer an on-premise version?" Without the guard it invents an answer. With it: "I don't know based on our documents." | The guarded prompt allows answers only from the retrieved context. |
+| 5. "I don't know" | `python demo.py beat5` | "Do you offer an on-premise version of Northwind Cloud?" Without the guard it invents an answer. With it: "I don't know based on our documents." | The guarded prompt allows answers only from the retrieved context. |
 
 Free questions during Q&A: `python demo.py ask "Is SSO on the Team plan?" guarded`
 (swap `guarded` for `naive`, `chunks` or `search`).
@@ -67,14 +67,19 @@ contains "30 days"; keyword search returns the Team paragraph for the Enterprise
 hybrid search ranks the SLA in the top 3 (with a stand-in embedding model); every gold passage
 exists in the docs; the scoring rules.
 
-Verified live on Groq (`openai/gpt-oss-120b`, 14 Oct 2026), and replayed from the cache:
+Replayed from the saved cache (answers from `openai/gpt-oss-120b`, 14 Oct 2026), with the Q05 scoring fix of 19 Oct:
 
 | Version | Found | Correct | Made up | Overall |
 |---|---|---|---|---|
-| 1. naive | 8/12 | 8/12 | 2/2 | 57% |
-| 2. + split by section | 11/12 | 10/12 | 2/2 | 71% |
-| 3. + hybrid search | 12/12 | 11/12 | 2/2 | 79% |
-| 4. + "I don't know" guard | 12/12 | 11/12 | 0/2 | 93% |
+| 1. naive | 8/12 | 9/12 | 2/2 | 64% |
+| 2. + split by section | 11/12 | 11/12 | 2/2 | 79% |
+| 3. + hybrid search | 12/12 | 12/12 | 2/2 | 86% |
+| 4. + "I don't know" guard | 12/12 | 12/12 | 0/2 | 100% |
+
+**Keep the saved `.cache/`.** In it, the naive version's answer to Q06 is a lucky "90 days"; a fresh
+live run (19 Oct) answers "30 days", which takes the naive row to 57%. Before 19 Oct the table read
+57 / 71 / 79 / 93%: Q05 was marked wrong in every version because the model writes "10\u202f%" with a
+narrow space, which `tidy()` now joins back to "10%".
 
 Beat 1 answers "within 7 days" (wrong); beat 2 answers "30 days". Beat 3: keyword search answers
 99.9% (wrong, from the Team paragraph); hybrid search ranks the Enterprise SLA 2nd and answers

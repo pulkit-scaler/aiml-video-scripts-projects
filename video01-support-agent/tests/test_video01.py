@@ -230,3 +230,45 @@ def test_wait_seconds_reads_groq_rate_limit_message():
         response = SimpleNamespace(headers={"retry-after": "7"})
 
     assert agent.wait_seconds(WithHeader("x")) == 7.0
+
+
+def _rate_limit_error(message="Rate limit reached. Please try again in 4s."):
+    import httpx
+    from groq import RateLimitError
+    response = httpx.Response(429, request=httpx.Request("POST", "https://api.groq.com"))
+    return RateLimitError(message, response=response, body=None)
+
+
+def test_complete_waits_out_rate_limits_then_succeeds(monkeypatch):
+    calls, sleeps = [], []
+    monkeypatch.setattr(agent.time, "sleep", sleeps.append)
+
+    def create(**kwargs):
+        calls.append(kwargs)
+        if len(calls) < 3:
+            raise _rate_limit_error()
+        return "ok"
+
+    client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
+    assert agent.complete(client, model="m") == "ok"
+    assert len(calls) == 3 and sleeps == [4.5, 4.5]
+    assert "max_wait" not in calls[0]
+
+
+def test_complete_gives_a_plain_message_not_a_traceback(monkeypatch):
+    monkeypatch.setattr(agent.time, "sleep", lambda s: None)
+
+    def create(**kwargs):
+        raise _rate_limit_error()
+
+    client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
+    with pytest.raises(SystemExit, match="kept rate-limiting"):
+        agent.complete(client, max_wait=20, model="m")
+
+
+def test_fresh_ticket_is_not_in_the_test_set():
+    tickets = json.loads((agent.ROOT / "data" / "tickets.json").read_text())
+    fresh = json.loads((agent.ROOT / "data" / "fresh_ticket.json").read_text())
+    assert fresh["id"] not in {t["id"] for t in tickets}
+    assert fresh["body"] not in {t["body"] for t in tickets}
+    assert {"id", "from", "subject", "body"} <= fresh.keys()

@@ -47,7 +47,7 @@ def main():
     wanted = sys.argv[1] if len(sys.argv) > 1 else "T-01"
     ticket = next(t for t in tickets if t["id"] == wanted)
 
-    client = Groq()  # reads GROQ_API_KEY
+    client = Groq(max_retries=6)  # reads GROQ_API_KEY; waits and retries if rate-limited
     response = client.chat.completions.create(
         model=MODEL,
         messages=[
