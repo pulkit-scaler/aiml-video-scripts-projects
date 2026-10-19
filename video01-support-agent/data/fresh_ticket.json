@@ -1,0 +1,6 @@
+{
+  "id": "T-21",
+  "from": "omar.haddad@brightpathlogistics.com",
+  "subject": "API errors since this morning",
+  "body": "Hi, since about 8am almost every call from our EU warehouse system to your API fails with a 503 error. Our drivers can't download their delivery routes, and the evening shift starts at 6pm. Can someone look at this today?"
+}

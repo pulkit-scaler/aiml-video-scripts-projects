@@ -52,13 +52,45 @@ pytest                        # runs with no API key
 |---|---|---|
 | `GROQ_API_KEY` | yes | from console.groq.com/keys |
 | `MODEL` | no | defaults to `openai/gpt-oss-20b`. It must support strict JSON schema on Groq: `openai/gpt-oss-20b` or `openai/gpt-oss-120b`. |
-| `SLACK_WEBHOOK_URL` | no | a Slack incoming webhook. If empty, Slack messages are printed and appended to `outbox/slack.log`, so the demo never breaks. |
+| `SLACK_WEBHOOK_URL` | no | a Slack incoming webhook (see [Set up Slack](#set-up-slack)). If empty, Slack messages are printed and appended to `outbox/slack.log`, so the demo never breaks. |
 
 Draft replies are written to `outbox/drafts/<ticket_id>.md`.
 
+## Set up Slack
+
+The agent posts high-urgency alerts to a Slack channel through an incoming webhook. Setup takes
+about five minutes, once.
+
+1. Create a **private** channel for the alerts, for example `#northwind-oncall-alerts`. Private
+   (or a separate demo workspace) means the alerts never reach colleagues.
+2. Go to [api.slack.com/apps](https://api.slack.com/apps?new_app=1), click **Create New App**,
+   choose **Blank app**, name it (for example "Northwind Triage Agent") and pick your workspace.
+   It needs no scopes and no events: click **Continue** through both steps, then **Create**, and
+   **Create Anyway** when Slack says the app can't do anything yet.
+3. In the app's settings, open **Incoming Webhooks** and switch **Activate Incoming Webhooks** on.
+4. Click **Add New Webhook**, pick your channel and click **Allow**. A channel made a minute ago
+   may not show in the picker yet: open it once in Slack, then reload the page.
+5. Back on **Incoming Webhooks**, click **Copy** next to the new webhook URL. It looks like
+   `https://hooks.slack.com/services/T.../B.../...`.
+6. Paste it into `.env` as `SLACK_WEBHOOK_URL=...`. If you deploy, add the same value in the
+   Render (or Railway) environment variables.
+7. Test it:
+
+   ```bash
+   python -c "import agent; print(agent.post_to_slack('Test from the triage agent'))"
+   ```
+
+   It prints `Posted to Slack.` and the message appears in the channel.
+
+The webhook URL is a secret: anyone who has it can post to the channel. Keep it in `.env` only
+(git ignores that file) and never show it on screen. If it leaks, delete the webhook on the
+**Incoming Webhooks** page and add a new one. With a webhook set, alerts go to Slack only; with
+it empty, they go to `outbox/slack.log`. The tests never post: they remove the webhook first.
+
 ## Run each step
 
-Run everything from the project folder with the venv active.
+Run everything from the project folder with the venv active. Run one demo at a time: the Groq
+free tier allows 30 requests a minute per key, and two demos at once make each other wait.
 
 ```bash
 python steps/step1_llm.py T-01                  # structured output for one ticket
@@ -66,15 +98,16 @@ python steps/step2_tools.py T-02                # agent loop: watch it pick tool
 python steps/step3_rag.py "whole team locked out, payroll due today"
 python steps/step4_eval.py --prompt v1          # naive prompt: 12/20, polite T-12 fails
 python steps/step4_eval.py --prompt v2          # fixed prompt: 19/20, T-12 passes
-uvicorn steps.step5_service:app --reload        # web service on :8000
+uvicorn steps.step5_service:app --reload --port 8010   # web service on :8010
 python agent.py T-07                            # the finished agent, one ticket
+python agent.py data/fresh_ticket.json          # a ticket that isn't in the test set
 ```
 
 Calling the service:
 
 ```bash
-curl localhost:8000/health
-curl -X POST localhost:8000/triage -H "Content-Type: application/json" -d @data/sample_ticket.json
+curl localhost:8010/health
+curl -X POST localhost:8010/triage -H "Content-Type: application/json" -d @data/fresh_ticket.json
 ```
 
 ## The two prompts (the on-camera fix)
@@ -132,7 +165,7 @@ then Generate Domain.
 ```bash
 # from this folder
 docker build -t triage-agent .
-docker run --rm -p 8000:8000 --env-file .env triage-agent
+docker run --rm -p 8010:8000 --env-file .env triage-agent   # then curl localhost:8010/health
 ```
 
 ## Presenter run-of-show
@@ -142,15 +175,15 @@ venv active and `.env` filled in (see Safety net).
 
 | Time | Segment | Command (Terminal A) | What should appear on screen |
 |---|---|---|---|
-| 0:00 | Cold open | `python agent.py T-07` (pre-run in Terminal B is fine) | Tool calls scroll by (`lookup_policy`, `post_to_slack`, `save_draft_reply`), then JSON with `"urgency": "high"`. Show `[SLACK]` line and open `outbox/drafts/T-07.md`. |
+| 0:00 | Cold open | `python agent.py T-07` (pre-run in Terminal B is fine) | Tool calls scroll by (`lookup_policy`, `post_to_slack`, `save_draft_reply`), then JSON with `"urgency": "high"`. Show the alert arriving in the Slack channel (or the `[SLACK]` line if no webhook is set) and open `outbox/drafts/T-07.md`. |
 | 1:00 | Pick the problem | `cat data/tickets.json`, `cat data/refund_policy.md` | A support inbox of 20 tickets and a real policy document. Explain: summarise, set urgency, check policy, act. |
 | 2:30 | Step 1: call the model | `python steps/step1_llm.py T-01` | Clean JSON: `summary`, `urgency`, `recommended_action`. Point at the `Triage` class: "we tell it the exact shape we want back". |
 | 4:00 | Step 2: tools | `python steps/step2_tools.py T-02`, then `python steps/step2_tools.py T-03` | T-02 (outage): `MODEL CALLS: lookup_policy`, `post_to_slack`, `save_draft_reply`. T-03 (dark mode request): no Slack call. Optional: edit the `post_to_slack` description to "Use this for EVERY ticket", rerun T-03, it now posts. Revert. |
 | 6:30 | Step 3: RAG | `python steps/step3_rag.py "whole team locked out, payroll due today"` | "Policy split into 12 chunks", then the `## Account lockout procedure` section. Then try `"refund annual plan"`. |
 | 8:30 | Step 4: eval, v1 | `python steps/step4_eval.py --prompt v1` | Results table with 8 FAIL rows, including `T-12 high medium FAIL`, and `Accuracy (v1): 12/20 = 60%`. |
 | 9:30 | Step 4: fix and re-run | Show `PROMPT_V2` in `agent.py`, then `python steps/step4_eval.py --prompt v2` | `T-12` now passes; `Accuracy (v2): 19/20 = 95%`. Line to say: "Judge urgency by business impact and deadlines, not by tone." |
-| 10:30 | Step 5: deploy | `uvicorn steps.step5_service:app`, then `curl localhost:8000/health`; show `Dockerfile` and `render.yaml`; switch to the pre-deployed Render URL | `{"status":"ok","model":"..."}` locally, then the same from the public URL. |
-| 12:30 | End to end | `curl -X POST <render-url>/triage -H "Content-Type: application/json" -d @data/sample_ticket.json` | Full triage JSON for T-07 with `actions_taken`, the alert arriving in the Slack channel, the draft reply. |
+| 10:30 | Step 5: deploy | `uvicorn steps.step5_service:app --port 8010`, then `curl localhost:8010/health`; show `Dockerfile` and `render.yaml`; switch to the pre-deployed Render URL | `{"status":"ok","model":"..."}` locally, then the same from the public URL. |
+| 12:30 | End to end | `curl -X POST <render-url>/triage -H "Content-Type: application/json" -d @data/fresh_ticket.json` | Full triage JSON for T-21, a ticket that isn't in the test set, with `"urgency": "high"` and all three tools in `actions_taken`, and the `HIGH urgency` alert arriving in the Slack channel. (On a deployed service the draft is saved on the server, so point at `save_draft_reply` in `actions_taken`.) |
 
 ### Safety net
 
@@ -166,12 +199,14 @@ already-live URL, because a cold Docker build takes several minutes.
 - [ ] `pytest -q` passes in both terminals.
 - [ ] `.env` has `GROQ_API_KEY`.
 - [ ] Run `python steps/step4_eval.py --prompt v1` and `--prompt v2` twice each and note the numbers. The eval runs at temperature 0, so the numbers should repeat; confirm T-12 fails on v1 and passes on v2.
-- [ ] Slack: create an incoming webhook in a demo workspace, put it in `.env` and in Render, and have the channel visible on a second screen. Or leave it empty and show `outbox/slack.log`.
+- [ ] Slack: webhook set up (see [Set up Slack](#set-up-slack)), in `.env` and in Render, and the alert channel open on a second screen. Or leave it empty and show `outbox/slack.log`.
+- [ ] Nothing else uses the Groq key during the shoot. On the free tier, another demo running at the same time makes the agent pause, and it prints `(Groq rate limit: waiting Ns)`.
+- [ ] Port 8010 is free: `lsof -i :8010` prints nothing.
 - [ ] Clear old output: `rm -rf outbox`.
 - [ ] Render service deployed, `/health` returns ok, `GROQ_API_KEY` set in the Render dashboard (free plans sleep: hit `/health` five minutes before recording).
 - [ ] Terminal font large (18pt or more), dark theme, prompt shortened, notifications off.
 - [ ] Never show `.env` or the Render environment page on screen. Check the API key has a spend limit.
-- [ ] Browser tabs ready: Render dashboard, Slack channel, `localhost:8000/docs` (FastAPI's auto docs page).
+- [ ] Browser tabs ready: Render dashboard, Slack channel, `localhost:8010/docs` (FastAPI's auto docs page).
 
 ## Tests
 

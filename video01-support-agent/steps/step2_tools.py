@@ -57,8 +57,9 @@ TOOLS = [
 ]
 
 SYSTEM_PROMPT = """You triage support tickets for Northwind Cloud, a B2B SaaS company.
-Decide the urgency (high, medium or low), check the policy, take the right actions
-with your tools, then finish with a one-paragraph summary of what you did."""
+First check the policy. Then decide the urgency (high, medium or low) and take the right
+actions with your tools. Finish with one short plain-text paragraph, no markdown, that
+says only what your tools actually did."""
 
 
 def main():
@@ -67,7 +68,7 @@ def main():
     ticket = next(t for t in tickets if t["id"] == wanted)
     print(f"Ticket {ticket['id']}: {ticket['subject']}\n")
 
-    client = Groq()  # reads GROQ_API_KEY
+    client = Groq(max_retries=6)  # reads GROQ_API_KEY; waits and retries if rate-limited
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": f"Ticket {ticket['id']}\nSubject: {ticket['subject']}\n\n{ticket['body']}"},

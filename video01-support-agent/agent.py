@@ -10,6 +10,7 @@ looks up company policy, posts to Slack if urgent, and saves a draft reply.
 import json
 import os
 import re
+import sys
 import time
 import urllib.request
 from pathlib import Path
@@ -25,8 +26,9 @@ load_dotenv(ROOT / ".env")  # this project's own .env
 
 
 def get_client():
-    """A Groq client. Reads GROQ_API_KEY from the environment or .env."""
-    return Groq()
+    """A Groq client. Reads GROQ_API_KEY from the environment or .env.
+    max_retries=0: complete() below handles rate limits itself, waiting exactly as long as Groq asks."""
+    return Groq(max_retries=0)
 
 
 def wait_seconds(err) -> float:
@@ -38,10 +40,12 @@ def wait_seconds(err) -> float:
     return int(match.group(1) or 0) * 60 + float(match.group(2)) if match else 5.0
 
 
-def complete(client, **kwargs):
-    """One chat completion. On Groq's free-tier rate limit, wait as long as Groq asks and try again."""
+def complete(client, max_wait: float = 300, **kwargs):
+    """One chat completion. On Groq's free-tier rate limit, wait as long as Groq asks and try again,
+    for up to max_wait seconds in total. Ends with a plain message, never a traceback."""
     from groq import RateLimitError
-    for _ in range(30):
+    waited = 0.0
+    while True:
         try:
             return client.chat.completions.create(**kwargs)
         except RateLimitError as err:
@@ -49,8 +53,13 @@ def complete(client, **kwargs):
             if seconds > 120:  # the daily budget is used up: waiting a minute won't help
                 raise SystemExit(f"Groq's daily limit for {kwargs.get('model')} is used up. Try again in "
                                  f"{seconds / 60:.0f} minutes, or set MODEL in .env to another model.") from err
+            if waited + seconds > max_wait:
+                raise SystemExit("Groq kept rate-limiting this key for 5 minutes. Make sure nothing else "
+                                 "is using the same API key, wait a minute, and run again.") from err
+            if seconds >= 3:
+                print(f"  (Groq rate limit: waiting {seconds:.0f}s)", file=sys.stderr)
             time.sleep(seconds + 0.5)
-    return client.chat.completions.create(**kwargs)
+            waited += seconds + 0.5
 
 
 MODEL = os.getenv("MODEL") or "openai/gpt-oss-20b"
@@ -83,8 +92,12 @@ PROMPTS = {"v1": PROMPT_V1, "v2": PROMPT_V2}
 AGENT_INSTRUCTIONS = """
 You have tools. For every ticket:
 1. Call lookup_policy to find the relevant company policy.
-2. If urgency is high, call post_to_slack with a one-line alert for the on-call team.
+2. If urgency is high, call post_to_slack with a one-line alert for the on-call team, in this form:
+   "HIGH urgency: <ticket id>, <customer>: <the problem and any deadline>".
 3. Call save_draft_reply with a short, warm reply to the customer that follows the policy.
+   It is a draft that a support agent will check before sending, so never claim that anything
+   has already been verified, unlocked, fixed or sent. Say what happens next, as the policy sets out.
+   Sign it "Northwind Cloud Support", with no placeholders such as [Your Name].
 Then give your final triage."""
 
 
@@ -195,7 +208,8 @@ TOOLS = [
                        "Only use this for HIGH urgency tickets.",
         "parameters": {
             "type": "object",
-            "properties": {"message": {"type": "string", "description": "One-line alert: ticket id, customer, problem"}},
+            "properties": {"message": {"type": "string",
+                                       "description": "One-line alert: 'HIGH urgency: <ticket id>, <customer>: <problem>'"}},
             "required": ["message"],
         },
     }},
@@ -274,8 +288,13 @@ def triage(ticket: dict, system_prompt: str = PROMPT_V2, max_rounds: int = 8) ->
     return {"ticket_id": ticket["id"], **result, "actions_taken": actions}
 
 if __name__ == "__main__":
-    import sys
-    tickets = json.loads((ROOT / "data" / "tickets.json").read_text())
+    # python agent.py T-07                      a ticket from data/tickets.json
+    # python agent.py data/fresh_ticket.json    any ticket saved as a JSON file
     wanted = sys.argv[1] if len(sys.argv) > 1 else "T-07"
-    ticket = next(t for t in tickets if t["id"] == wanted)
-    print(json.dumps(triage(ticket), indent=2))
+    if wanted.endswith(".json"):
+        ticket = json.loads(Path(wanted).read_text())
+    else:
+        tickets = json.loads((ROOT / "data" / "tickets.json").read_text())
+        ticket = next(t for t in tickets if t["id"] == wanted)
+    # ensure_ascii=False shows characters such as narrow spaces as they are, not as \u202f codes.
+    print(json.dumps(triage(ticket), indent=2, ensure_ascii=False))

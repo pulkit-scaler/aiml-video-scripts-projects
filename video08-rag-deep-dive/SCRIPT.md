@@ -6,7 +6,7 @@
 
 **Goal:** turn masterclass curiosity into a career decision
 
-**Topic:** RAG, following the masterclass "Build your first RAG system". The demo is in `video08-rag-deep-dive/`. Run `python demo.py warm` the day before, so every beat replays instantly on camera.
+**Topic:** RAG, following the masterclass "Build your first RAG system". The demo is in `video08-rag-deep-dive/`. Run `python demo.py warm` the day before, so every beat replays instantly on camera. Keep the existing `.cache/` folder: the numbers below come from it, and a fresh re-warm can change them.
 
 ## 0:00 Hook (2 min)
 
@@ -40,17 +40,17 @@ SAY: "Sounds confident, doesn't it? It's wrong. This is what most first attempts
 
 SAY: "The answer was in the document all along. The system just cut the page in the wrong place. Watch what happens when I fix that."
 
-**Beat 3: fix problem two.** Run `python demo.py beat3`. "What uptime does the Enterprise plan guarantee?" Keyword search finds the Team plan's paragraph (99.5%), and the answer comes out wrong. Hybrid search, keywords plus meaning, also finds the Enterprise SLA, and the answer is right: 99.95%.
+**Beat 3: fix problem two.** Run `python demo.py beat3`. "What uptime does the Enterprise plan guarantee?" Keyword search finds the Team plan's paragraph (99.5%), and the answer comes out wrong: 99.9%, a number that isn't in any document. Hybrid search, keywords plus meaning, also finds the Enterprise SLA, and the answer is right: 99.95%.
 
 SAY: "Better. Now it finds the right paragraph, not just a similar-sounding one."
 
-**Beat 4: measure it.** Run `python demo.py beat4`. 14 test questions with known answers. For each version, the table shows how often the right passage was found, how often the answer was correct, and how often it made something up. Overall: 57%, then 71%, then 79%, then 93%.
+**Beat 4: measure it.** Run `python demo.py beat4`. 14 test questions: 12 with known answers, and 2 the documents can't answer. For each version, the table shows how often the right passage was found, how often the answer was correct, and how often it made something up. Overall: 64%, then 79%, then 86%, then 100%.
 
 SAY: "And this is the step that separates a demo from something you'd trust in front of a client. We don't say 'looks better'. We measure it."
 
-SAY: "Fifty-seven percent at the start. Ninety-three percent at the end. Now we know it's better, and by how much."
+SAY: "Sixty-four percent at the start. A hundred percent at the end. Now we know it's better, and by how much."
 
-**Beat 5: one production problem.** Run `python demo.py beat5`. "Do you offer an on-premise version?" The documents don't say. Without the guard, it makes something up: "No, we don't provide an on-premise version." With the guard, it says it doesn't know based on our documents.
+**Beat 5: one production problem.** Run `python demo.py beat5`. "Do you offer an on-premise version of Northwind Cloud?" The documents don't say. Without the guard, it makes something up: "No. Northwind Cloud is only available as a hosted service; we don't provide an on-premise version." With the guard, it says it doesn't know based on our documents.
 
 SAY: "Last one. What happens when someone asks something the documents don't cover? A good system says 'I don't know.' A bad one makes something up. Here's how you make it say 'I don't know.'"
 

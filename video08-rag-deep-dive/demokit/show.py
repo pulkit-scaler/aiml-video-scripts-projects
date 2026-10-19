@@ -19,5 +19,7 @@ def table(rows: list[list], headers: list[str]) -> None:
 
 
 def wrap(text: str, width: int = 88, indent: str = "  ") -> str:
-    return "\n".join(textwrap.fill(p, width, initial_indent=indent, subsequent_indent=indent)
+    # break_on_hyphens=False keeps words like "on-premise" on one line.
+    return "\n".join(textwrap.fill(p, width, initial_indent=indent, subsequent_indent=indent,
+                                   break_on_hyphens=False)
                      for p in text.splitlines() if p.strip())

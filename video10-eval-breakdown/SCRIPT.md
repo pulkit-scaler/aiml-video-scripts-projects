@@ -48,13 +48,13 @@ SAY: "Bigger test. Still about ninety-four percent. Still looks great."
 
 **Beat 3.** Run `python demo.py beat3`: accuracy per message type, worst first. Payment disputes, the chargebacks from the bank, are 0 out of 5. Every other type is 100%.
 
-SAY: "Now watch. Split it by type. This category? It fails nearly every time. The overall number hid it, because it's rare."
+SAY: "Now watch. Split it by type. This category? It fails every single time. The overall number hid it, because it's rare."
 
 SAY: "And in real life, the rare case is often the expensive one. The fraud. The legal clause. The VIP customer."
 
 SAY: "A fraud model that's right ninety-nine percent of the time can still miss most of the fraud. If fraud is rare, the average barely notices."
 
-**Beat 4.** Run `python demo.py beat4`. All five chargebacks were filed somewhere else: three as billing questions, one as a refund request, one as an invoice. The cause: the label list was built from five easy examples, so it had no place for a chargeback. v2 adds a payment_dispute label, and the re-run is 100%.
+**Beat 4.** Run `python demo.py beat4`. All five chargebacks were filed somewhere else: three as support questions, one as a refund request, one as an invoice. The cause: the label list was built from five easy examples, so it had no place for a chargeback. v2 adds a payment_dispute label, and the re-run is 100%.
 
 SAY: "The agent-only builder ships after step one and thinks they're done. The person with data and ML understanding catches step three. Because they know one average can hide a disaster."
 
@@ -92,6 +92,6 @@ SAY: "Not sure how much of this you need for the role you want? Ask us. We'll te
 
 ## Ad cut (45 sec)
 
-**"95% and still broken":** Beats 1 to 3 of the demo. Open on "Five out of five. Looks great." End on "one average can hide a disaster."
+**"95% and still broken":** Beats 1 to 3 of the demo, then the line after Beat 4 (cut Beat 4's terminal output). Open on "Five out of five. Looks great." End on "one average can hide a disaster."
 
-**Before shoot:** run `python demo.py warm`, then `beat2`, and check the accuracy printed matches the line above.
+**Before shoot:** run `python demo.py warm`, then `beat2` and `beat4`, and check both match the lines above. Keep the existing `.cache/` folder and copy it to the shoot machine: a fresh re-warm can change Beat 4's split.
